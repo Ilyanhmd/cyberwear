@@ -8,13 +8,12 @@ const app = express();
 app.use(express.json());
 app.use(express.static('.'));
 
-// ⚠️ CATALOGUE OFFICIEL CÔTÉ SERVEUR (les prix ne peuvent pas être modifiés par le client)
+// ⚠️ CATALOGUE OFFICIEL CÔTÉ SERVEUR
 const PRODUCTS = {
-  1: { name: "Hoodie Stealth Oversized", priceCents: 7500 },
-  2: { name: "T-Shirt Minimal Cyber", priceCents: 4000 },
-  3: { name: "Veste M65 Techwear", priceCents: 12000 },
-  4: { name: "Hoodie Heavyweight Black", priceCents: 8000 },
-  5: { name: "T-Shirt Graphic Acid Wash", priceCents: 4500 },
+  'mastodonte': { name: "T-shirt Le Mastodonte", priceId: 'price_1UWCOKAZtt33WjfOf63xUrR8' },
+  'souverain-des-enfers': { name: "T-shirt Souverain des Enfers", priceId: 'price_1UWCQVAZtt33WjfOfhyXGLja' },
+  'ange-de-la-mort': { name: "T-shirt L'Ange de la Mort", priceId: 'price_1UWCRpAZtt33WjfOXWhImNjb' },
+  'cyborg': { name: "T-shirt Cyborg", priceId: 'price_1UWCT4AZtt33WjfOB5RD96YC' }
 };
 
 const SIZES = ['S', 'M', 'L', 'XL'];
@@ -25,53 +24,43 @@ app.post('/api/checkout', async (req, res) => {
   try {
     const { items } = req.body;
 
-    // 1. Validation stricte des données reçues du panier
+    // 1. Validation stricte du panier
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: "Le panier est vide." });
     }
 
+    // 2. Préparation des articles pour Stripe
     const line_items = items.map(item => {
       const product = PRODUCTS[item.id];
-      
-      // Sécurité : Vérifie si le produit existe
       if (!product) {
-        throw new Error(`Produit inconnu (ID: ${item.id})`);
+        throw new Error(`Produit introuvable : ${item.id}`);
       }
-      
-      // Sécurité : Vérifie si la taille est valide
-      if (!SIZES.includes(item.size)) {
+
+      if (item.size && !SIZES.includes(item.size)) {
         throw new Error(`Taille invalide : ${item.size}`);
       }
 
-      // Sécurité : Vérifie la quantité (entre 1 et 10)
-      const qty = Number(item.qty);
+      const qty = Number(item.quantity);
       if (!Number.isInteger(qty) || qty < 1 || qty > MAX_QTY) {
         throw new Error(`Quantité invalide pour ${product.name}`);
       }
 
       return {
-        price_data: {
-          currency: 'eur',
-          product_data: {
-            name: `${product.name} [Taille : ${item.size}]`,
-          },
-          unit_amount: product.priceCents, // Le prix vient d'ici, impossible à pirater
-        },
-        quantity: qty,
+        price: product.priceId,
+        quantity: qty
       };
     });
 
-    // 2. Création de la session de paiement Stripe
-const session = await stripe.checkout.sessions.create({
-    payment_method_types: ['card'],
-    line_items,
-    mode: 'payment',
-    success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${req.headers.origin}/`,
-});
+    // 3. Création de la session de paiement Stripe
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items,
+      mode: 'payment',
+      success_url: 'https://cyberwear.onrender.com/success.html',
+      cancel_url: 'https://cyberwear.onrender.com/cancel.html',
+    });
 
-    // 3. Renvoie l'URL sécurisée de Stripe au site web
-    res.json({ url: session.url });
+    res.json({ id: session.id, url: session.url });
 
   } catch (err) {
     console.error("Erreur Checkout:", err.message);
@@ -79,7 +68,7 @@ const session = await stripe.checkout.sessions.create({
   }
 });
 
-// Lancement du serveur sur le port 3000
+// Lancement du serveur sur le port configuré ou 3000
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`🚀 Serveur e-commerce prêt sur http://localhost:${PORT}`);
