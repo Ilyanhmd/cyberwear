@@ -62,13 +62,13 @@ app.post('/api/checkout', async (req, res) => {
     });
 
     // 2. Création de la session de paiement Stripe
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items,
-      mode: 'payment',
-      success_url: `http://localhost:3000/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `http://localhost:3000/`,
-    });
+const session = await stripe.checkout.sessions.create({
+    payment_method_types: ['card'],
+    line_items,
+    mode: 'payment',
+    success_url: `${req.headers.origin}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${req.headers.origin}/`,
+});
 
     // 3. Renvoie l'URL sécurisée de Stripe au site web
     res.json({ url: session.url });
