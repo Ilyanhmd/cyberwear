@@ -40,7 +40,7 @@ app.post('/api/checkout', async (req, res) => {
         throw new Error(`Taille invalide : ${item.size}`);
       }
 
-      const qty = Number(item.quantity);
+     const qty = Number(item.quantity || item.qty);
       if (!Number.isInteger(qty) || qty < 1 || qty > MAX_QTY) {
         throw new Error(`Quantité invalide pour ${product.name}`);
       }
