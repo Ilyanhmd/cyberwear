@@ -58,7 +58,7 @@ app.post('/api/webhook', express.raw({ type: 'application/json' }), async (req, 
 
 // Middleware standard pour lire le JSON
 app.use(express.json());
-app.use(express.static('public')); // Si tes fichiers sont à la racine, tu peux adapter si besoin
+app.use(express.static(__dirname)); // Si tes fichiers sont à la racine, tu peux adapter si besoin
 
 // Définition de tes t-shirts et de leurs priceId Stripe
 const PRODUCTS = {
