@@ -3,101 +3,250 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBERWEAR - Boutique Officielle</title>
+    <title>CYBERWEAR - Streetwear & Cyberpunk</title>
     <style>
+        :root {
+            --bg-color: #0b0b0e;
+            --card-bg: #141419;
+            --accent: #00ffcc;
+            --accent-hover: #00ccb3;
+            --text-main: #ffffff;
+            --text-muted: #a0a0ab;
+            --border: #22222c;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #0f0f11;
-            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
+            line-height: 1.6;
         }
-        header {
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(20, 20, 25, 0.9);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
             text-align: center;
-            padding: 40px 20px;
-            background: #1a1a1e;
-            border-bottom: 1px solid #333;
+            padding: 80px 20px;
+            background: linear-gradient(180deg, rgba(0,255,204,0.05) 0%, rgba(11,11,14,0) 100%);
+            border-bottom: 1px solid var(--border);
         }
-        h1 {
-            color: #00ffcc;
-            margin: 0;
-            font-size: 2.5rem;
+
+        .hero h1 {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
         }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Titres */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Grille Produits */
         .container {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 0 auto;
             padding: 0 20px;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
+
         .product-card {
-            background: #1a1a1e;
-            border: 1px solid #333;
-            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
             padding: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            transition: transform 0.3s, border-color 0.3s;
         }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
         .product-card img {
             width: 100%;
-            height: 280px;
+            height: 300px;
             object-fit: cover;
-            border-radius: 6px;
+            border-radius: 8px;
             margin-bottom: 15px;
         }
+
         .product-card h3 {
-            margin-bottom: 10px;
+            margin: 10px 0 5px;
             font-size: 1.2rem;
         }
+
         .price {
-            color: #00ffcc;
+            color: var(--accent);
             font-weight: bold;
-            font-size: 1.1rem;
-            margin-bottom: 10px;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
         }
+
         .product-options {
             margin: 15px 0;
             display: flex;
             justify-content: center;
             gap: 10px;
         }
+
         .product-options select {
-            background: #2a2a2e;
+            background: #1e1e26;
             color: #fff;
-            border: 1px solid #444;
-            padding: 5px;
-            border-radius: 4px;
+            border: 1px solid var(--border);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            outline: none;
+            cursor: pointer;
         }
+
+        .product-options select:focus {
+            border-color: var(--accent);
+        }
+
         button {
-            background: #00ffcc;
+            background: var(--accent);
             color: #000;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 20px;
             font-weight: bold;
-            border-radius: 5px;
+            font-size: 1rem;
+            border-radius: 6px;
             cursor: pointer;
             width: 100%;
+            transition: background 0.2s;
         }
+
         button:hover {
-            background: #00ccb3;
+            background: var(--accent-hover);
         }
+
+        /* Section L'Univers / Storytelling */
+        .story-section {
+            max-width: 800px;
+            margin: 80px auto;
+            padding: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .story-section h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+
+        .story-section p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .faq-item h4 {
+            margin: 0 0 10px;
+            color: var(--accent);
+        }
+
+        .faq-item p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
         footer {
             text-align: center;
-            padding: 30px 20px;
-            background: #1a1a1e;
-            border-top: 1px solid #333;
-            margin-top: 60px;
-            color: #aaa;
+            padding: 40px 20px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+            margin-top: 80px;
+            color: var(--text-muted);
             font-size: 0.9rem;
         }
+
         footer a {
-            color: #00ffcc;
+            color: var(--accent);
             text-decoration: none;
-            margin: 0 10px;
+            margin: 0 15px;
         }
+
         footer a:hover {
             text-decoration: underline;
         }
@@ -105,13 +254,26 @@
 </head>
 <body>
 
-    <header>
-        <h1>CYBERWEAR</h1>
-        <p>Collection exclusive de t-shirts cyberpunk & streetwear</p>
+    <!-- Barre de Navigation -->
+    <nav>
+        <a href="#" class="logo">CYBERWEAR</a>
+        <div class="nav-links">
+            <a href="#collection">Collection</a>
+            <a href="#univers">L'Univers</a>
+            <a href="#faq">FAQ</a>
+        </div>
+    </nav>
+
+    <!-- En-tête / Hero -->
+    <header class="hero">
+        <h1>FUTURISTIC STREETWEAR</h1>
+        <p>Des designs sombres et percutants inspirés des univers cyberpunk et dystopiques. Impression à la demande de haute qualité.</p>
     </header>
 
+    <!-- Grille de Produits -->
+    <h2 id="collection" class="section-title">La Collection</h2>
     <div class="container">
-        <!-- Produit 1 : Le Mastodonte -->
+        <!-- Produit 1 -->
         <div class="product-card">
             <div>
                 <img src="t-shirt-le-mastodonte.jpg" alt="T-shirt Le Mastodonte">
@@ -134,7 +296,7 @@
             <button onclick="acheter('mastodonte')">Acheter</button>
         </div>
 
-        <!-- Produit 2 : Souverain des Enfers -->
+        <!-- Produit 2 -->
         <div class="product-card">
             <div>
                 <img src="t-shirt-le-souverain-des-enfers.jpg" alt="T-shirt Souverain des Enfers">
@@ -157,7 +319,7 @@
             <button onclick="acheter('souverain-des-enfers')">Acheter</button>
         </div>
 
-        <!-- Produit 3 : L'Ange de la Mort -->
+        <!-- Produit 3 -->
         <div class="product-card">
             <div>
                 <img src="t-shirt-lange-de-la-mort.jpg" alt="T-shirt L'Ange de la Mort">
@@ -180,7 +342,7 @@
             <button onclick="acheter('ange-de-la-mort')">Acheter</button>
         </div>
 
-        <!-- Produit 4 : Cyborg -->
+        <!-- Produit 4 -->
         <div class="product-card">
             <div>
                 <img src="t-shirt-le-cyborg.jpg" alt="T-shirt Cyborg">
@@ -204,14 +366,35 @@
         </div>
     </div>
 
+    <!-- Section L'Univers -->
+    <section id="univers" class="story-section">
+        <h2>L'ADN CYBERWEAR</h2>
+        <p>Né de l'imaginaire cyberpunk et de la culture streetwear underground, CYBERWEAR propose des pièces uniques au design brut. Chaque t-shirt est imprimé à la demande avec soin pour garantir un rendu maximal tout en limitant le gaspillage.</p>
+    </section>
+
+    <!-- Section FAQ -->
+    <section id="faq" class="faq-section">
+        <h2>Foire Aux Questions</h2>
+        <div class="faq-item">
+            <h4>Quels sont les délais de livraison ?</h4>
+            <p>Chaque article est produit à la commande. Comptez généralement entre 3 et 7 jours ouvrés pour la fabrication et l'expédition directement depuis nos ateliers partenaires.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Comment suivre ma commande ?</h4>
+            <p>Dès que votre commande est validée et prise en charge, les notifications de suivi sont gérées automatiquement pour vous tenir informés.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 CYBERWEAR. Tous droits réservés.</p>
-        <p style="margin-top: 10px;">
+        <p style="margin-top: 15px;">
             <a href="/mentions-legales.html">Mentions Légales</a> | 
             <a href="/cgv.html">CGV</a>
         </p>
     </footer>
 
+    <!-- Script de Paiement Stripe -->
     <script>
         async function acheter(productId) {
             const sizeSelect = document.getElementById(`size-${productId}`);
