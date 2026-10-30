@@ -173,7 +173,7 @@ if (!Array.isArray(raw)) return [];
 return raw
 .filter(l => l && findProduct(l.id) && SIZES.includes(l.size) &&
 Number.isInteger(l.qty) && l.qty > 0 && l.qty <= MAX_QTY)
-.map(({ id, size, qty }) => ({ id, size, qty }));
+.map(({ id, size, qty }) => ({ id, size, quantity: qty }));
 } catch { return []; }
 }
 
