@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+<html lang="fr" class="dark">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CYBERWEAR | Technical Streetwear</title>
+
+<meta name="description" content="Streetwear technique minimaliste : hoodies, t-shirts et vestes.">
+
+<!-- PROD : remplacer par un CSS compilé avec la CLI Tailwind -->
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<script>
+
+tailwind.config = {
+
+darkMode: 'class',
+
+theme: { extend: {
+
+colors: { brand: { black: '#0a0a0c', card: '#121216', border: '#22222a', accent: '#00ff66', accentHover: '#00cc52' } },
+
+fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['JetBrains Mono', 'monospace'] }
+
+} }
+
+}
+
+</script>
+
+<style>
+
+body { background-color: #0a0a0c; color: #e4e4e7; font-family: 'Inter', sans-serif; }
+
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+:focus-visible { outline: 2px solid #00ff66; outline-offset: 2px; }
+
+body.no-scroll { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+
+*, *::before, *::after { animation: none !important; transition: none !important; }
+
+}
+
+</style>
+
+</head>
+
+<body class="flex flex-col min-h-screen">
+
+
+
+<header class="sticky top-0 z-40 bg-brand-black/90 backdrop-blur-md border-b border-brand-border">
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+
+<a href="#" class="text-xl font-extrabold tracking-wider mono text-white flex items-center gap-2">
+
+<span class="w-3 h-3 bg-brand-accent rounded-full inline-block animate-pulse" aria-hidden="true"></span>
+
+CYBERWEAR<span class="text-brand-accent">.IO</span>
+
+</a>
+
+<button id="cart-btn" type="button" aria-label="Ouvrir le panier" aria-haspopup="dialog" class="relative p-2 text-zinc-300 hover:text-white transition">
+
+<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+
+<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+
+</svg>
+
+<span id="cart-count" class="absolute -top-1 -right-1 bg-brand-accent text-black font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center mono">0</span>
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<section class="relative border-b border-brand-border overflow-hidden bg-gradient-to-b from-brand-card to-brand-black py-16 sm:py-24">
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+
+<span class="text-brand-accent mono text-xs tracking-widest uppercase bg-brand-accent/10 px-3 py-1 rounded-full border border-brand-accent/20">Drop 001 // Disponible</span>
+
+<h1 class="text-4xl sm:text-6xl font-black text-white uppercase tracking-tight mt-4">Vêtements Techniques <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-brand-accent">Sans Compromis</span></h1>
+
+<p class="mt-4 text-zinc-400 max-w-xl mx-auto text-sm sm:text-base">Streetwear minimaliste et fonctionnel, conçu pour la discrétion et la performance urbaine.</p>
+
+<a href="#products" class="inline-block mt-8 bg-brand-accent text-black font-bold px-8 py-3 rounded-lg hover:bg-brand-accentHover transition mono uppercase text-sm tracking-wider">Explorer la collection</a>
+
+</div>
+
+</section>
+
+
+
+<main id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow w-full">
+
+<div id="filter-container" class="flex flex-wrap gap-2 justify-center mb-8 mono text-xs" role="group" aria-label="Filtrer par catégorie">
+
+<button type="button" data-filter="all" aria-pressed="true" class="filter-btn bg-brand-accent text-black px-4 py-2 rounded-md font-bold transition">Tous</button>
+
+<button type="button" data-filter="hoodies" aria-pressed="false" class="filter-btn bg-brand-card text-zinc-400 px-4 py-2 rounded-md border border-brand-border hover:border-zinc-500 transition">Hoodies</button>
+
+<button type="button" data-filter="tshirts" aria-pressed="false" class="filter-btn bg-brand-card text-zinc-400 px-4 py-2 rounded-md border border-brand-border hover:border-zinc-500 transition">T-Shirts</button>
+
+<button type="button" data-filter="jackets" aria-pressed="false" class="filter-btn bg-brand-card text-zinc-400 px-4 py-2 rounded-md border border-brand-border hover:border-zinc-500 transition">Vestes</button>
+
+</div>
+
+<div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" aria-live="polite"></div>
+
+</main>
+
+
+
+<footer class="border-t border-brand-border bg-brand-card py-8 mt-12">
+
+<div class="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-3 gap-6 text-center text-zinc-400 text-xs mono">
+
+<div>🚀 Livraison 48h</div>
+
+<div>🔒 Paiement sécurisé</div>
+
+<div>🔄 Retours 30 jours (voir CGV)</div>
+
+</div>
+
+<nav class="max-w-7xl mx-auto px-4 mt-6 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-zinc-500" aria-label="Informations légales">
+
+<a href="/mentions-legales" class="hover:text-white">Mentions légales</a>
+
+<a href="/cgv" class="hover:text-white">CGV</a>
+
+<a href="/confidentialite" class="hover:text-white">Confidentialité</a>
+
+<a href="/cookies" class="hover:text-white">Cookies</a>
+
+</nav>
+
+</footer>
+
+
+
+<!-- PANIER -->
+
+<div id="cart-overlay" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden"></div>
+
+<aside id="cart-sidebar" role="dialog" aria-modal="true" aria-labelledby="cart-title" aria-hidden="true" inert
+
+class="fixed top-0 right-0 h-full w-full sm:w-96 bg-brand-card border-l border-brand-border z-50 transform translate-x-full transition-transform duration-300 flex flex-col">
+
+<div class="p-4 border-b border-brand-border flex justify-between items-center">
+
+<h2 id="cart-title" class="font-bold text-white mono uppercase">Votre panier</h2>
+
+<button id="close-cart" type="button" aria-label="Fermer le panier" class="text-zinc-400 hover:text-white text-2xl leading-none px-2">&times;</button>
+
+</div>
+
+<div id="cart-items" class="p-4 flex-grow overflow-y-auto space-y-4"></div>
+
+<div class="p-4 border-t border-brand-border bg-brand-black">
+
+<div class="flex justify-between items-center mb-4 text-sm mono">
+
+<span class="text-zinc-400">Total TTC</span>
+
+<span id="cart-total" class="text-xl font-bold text-brand-accent">0,00 €</span>
+
+</div>
+
+<button id="checkout-btn" type="button" class="w-full bg-brand-accent text-black font-bold py-3 rounded-lg hover:bg-brand-accentHover transition mono uppercase text-sm disabled:opacity-40 disabled:cursor-not-allowed">Passer la commande</button>
+
+</div>
+
+</aside>
+
+
+
+<!-- TOAST -->
+
+<div id="toast" role="status" aria-live="polite" class="fixed bottom-4 right-4 left-4 sm:left-auto z-[60] hidden">
+
+<div class="bg-brand-card border border-brand-accent text-white px-4 py-3 rounded-lg shadow-xl mono text-sm flex items-center gap-2">
+
+<span class="w-2 h-2 bg-brand-accent rounded-full shrink-0" aria-hidden="true"></span>
+
+<span id="toast-message"></span>
+
+</div>
+
+</div>
+
+
+
+<script>
+
+'use strict';
+
+
+
+// ---------- Données ----------
+
+const SIZES = ['S', 'M', 'L', 'XL'];
+
+const MAX_QTY = 10;
+
+const STORAGE_KEY = 'cyberwear_cart';
+
+const CHECKOUT_ENDPOINT = '/api/checkout'; // à implémenter côté serveur
+
+
+
+const CATEGORY_LABELS = { hoodies: 'Hoodies', tshirts: 'T-Shirts', jackets: 'Vestes' };
+
+
+
+const products = [
+      { 
+        id: 1, 
+        name: "Streetwear Graphic Tee | Cosmic", 
+        category: "tshirts", 
+        priceCents: 4000, 
+        img: "mastodonte.jpg" 
+      },
+      { 
+        id: 2, 
+        name: "Le Souverain des Enfers", 
+        category: "tshirts", 
+        priceCents: 4500, 
+        img: "souverain des enfers.jpg" 
+      },
+      { 
+        id: 3, 
+        name: "L'Ange de la Mort", 
+        category: "tshirts", 
+        priceCents: 4500, 
+        img: "l'ange de la mort.jpg" 
+      },
+      { 
+        id: 4, 
+        name: "Le Cyborg | Cyberpunk", 
+        category: "tshirts", 
+        priceCents: 4200, 
+        img: "cyborg.jpg" 
+      },
+    ];
+
+// ---------- Utilitaires ----------
+
+const $ = id => document.getElementById(id);
+
+const fmt = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
+
+const euro = cents => fmt.format(cents / 100);
+
+const findProduct = id => products.find(p => p.id === id);
+
+
+
+function esc(str) {
+
+return String(str).replace(/[&<>'"]/g, c =>
+
+({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[c]));
+
+}
+
+
+
+let toastTimer;
+
+function showToast(msg) {
+
+clearTimeout(toastTimer);
+
+$('toast-message').textContent = msg;
+
+$('toast').classList.remove('hidden');
+
+toastTimer = setTimeout(() => $('toast').classList.add('hidden'), 3000);
+
+}
+
+
+
+// ---------- Panier (stocke uniquement id / size / qty) ----------
+
+function loadCart() {
+
+try {
+
+const raw = JSON.parse(localStorage.getItem(STORAGE_KEY));
+
+if (!Array.isArray(raw)) return [];
+
+return raw
+
+.filter(l => l && findProduct(l.id) && SIZES.includes(l.size) &&
+
+Number.isInteger(l.qty) && l.qty > 0 && l.qty <= MAX_QTY)
+
+.map(({ id, size, qty }) => ({ id, size, qty }));
+
+} catch { return []; }
+
+}
+
+
+
+function saveCart() {
+
+try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch { /* stockage indisponible */ }
+
+}
+
+
+
+let cart = loadCart();
+
+
+
+function addToCart(id) {
+
+const product = findProduct(id);
+
+if (!product) return;
+
+const select = $('size-' + id);
+
+const size = select && SIZES.includes(select.value) ? select.value : 'M';
+
+const line = cart.find(l => l.id === id && l.size === size);
+
+if (line) {
+
+if (line.qty >= MAX_QTY) return showToast(`Maximum ${MAX_QTY} articles par référence`);
+
+line.qty++;
+
+} else {
+
+cart.push({ id, size, qty: 1 });
+
+}
+
+saveCart();
+
+updateCart();
+
+showToast(`${product.name} (${size}) ajouté`);
+
+openCart();
+
+}
+
+
+
+function changeQty(id, size, delta) {
+
+const line = cart.find(l => l.id === id && l.size === size);
+
+if (!line) return;
+
+const next = line.qty + delta;
+
+if (next > MAX_QTY) return showToast(`Maximum ${MAX_QTY} articles par référence`);
+
+if (next <= 0) cart = cart.filter(l => l !== line);
+
+else line.qty = next;
+
+saveCart();
+
+updateCart();
+
+}
+
+
+
+function removeLine(id, size) {
+
+cart = cart.filter(l => !(l.id === id && l.size === size));
+
+saveCart();
+
+updateCart();
+
+}
+
+
+
+function cartTotalCents() {
+
+return cart.reduce((sum, l) => sum + findProduct(l.id).priceCents * l.qty, 0);
+
+}
+
+
+
+function updateCart() {
+
+const totalQty = cart.reduce((s, l) => s + l.qty, 0);
+
+$('cart-count').textContent = totalQty;
+
+$('cart-btn').setAttribute('aria-label', `Ouvrir le panier, ${totalQty} article${totalQty > 1 ? 's' : ''}`);
+
+$('cart-total').textContent = euro(cartTotalCents());
+
+$('checkout-btn').disabled = cart.length === 0;
+
+
+
+if (cart.length === 0) {
+
+$('cart-items').innerHTML = `<p class="text-zinc-500 text-center mono text-sm py-8">Votre panier est vide.</p>`;
+
+return;
+
+}
+
+$('cart-items').innerHTML = cart.map(l => {
+
+const p = findProduct(l.id);
+
+return `
+
+<div class="flex justify-between items-center gap-3 border-b border-brand-border pb-3">
+
+<div class="min-w-0">
+
+<p class="font-bold text-sm text-white truncate">${esc(p.name)}</p>
+
+<p class="text-xs text-zinc-400 mono">Taille ${esc(l.size)}</p>
+
+<p class="text-xs text-brand-accent mono">${euro(p.priceCents)} × ${l.qty}</p>
+
+</div>
+
+<div class="flex items-center gap-2 shrink-0">
+
+<button type="button" data-action="dec" data-id="${p.id}" data-size="${esc(l.size)}" aria-label="Retirer une unité" class="w-8 h-8 bg-brand-border text-white rounded text-sm hover:bg-zinc-700">−</button>
+
+<span class="mono text-sm w-5 text-center" aria-live="polite">${l.qty}</span>
+
+<button type="button" data-action="inc" data-id="${p.id}" data-size="${esc(l.size)}" aria-label="Ajouter une unité" class="w-8 h-8 bg-brand-border text-white rounded text-sm hover:bg-zinc-700">+</button>
+
+<button type="button" data-action="remove" data-id="${p.id}" data-size="${esc(l.size)}" aria-label="Supprimer ${esc(p.name)} du panier" class="w-8 h-8 text-zinc-500 hover:text-red-400 text-sm">✕</button>
+
+</div>
+
+</div>`;
+
+}).join('');
+
+}
+
+
+
+// ---------- Ouverture / fermeture du panier ----------
+
+let lastFocus = null;
+
+
+
+function openCart() {
+
+const sidebar = $('cart-sidebar');
+
+lastFocus = document.activeElement;
+
+$('cart-overlay').classList.remove('hidden');
+
+sidebar.classList.remove('translate-x-full');
+
+sidebar.removeAttribute('inert');
+
+sidebar.setAttribute('aria-hidden', 'false');
+
+document.body.classList.add('no-scroll');
+
+$('close-cart').focus();
+
+}
+
+
+
+function closeCart() {
+
+const sidebar = $('cart-sidebar');
+
+sidebar.classList.add('translate-x-full');
+
+sidebar.setAttribute('inert', '');
+
+sidebar.setAttribute('aria-hidden', 'true');
+
+$('cart-overlay').classList.add('hidden');
+
+document.body.classList.remove('no-scroll');
+
+if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+
+}
+
+
+
+const isCartOpen = () => !$('cart-sidebar').classList.contains('translate-x-full');
+
+
+
+// ---------- Commande ----------
+
+let checkingOut = false;
+
+
+
+async function checkout() {
+
+if (checkingOut || cart.length === 0) return;
+
+checkingOut = true;
+
+const btn = $('checkout-btn');
+
+btn.disabled = true;
+
+btn.textContent = 'Redirection…';
+
+try {
+
+// On n'envoie JAMAIS de prix : le serveur recalcule depuis id/size/qty.
+
+const res = await fetch(CHECKOUT_ENDPOINT, {
+
+method: 'POST',
+
+headers: { 'Content-Type': 'application/json' },
+
+body: JSON.stringify({ items: cart })
+
+});
+
+if (!res.ok) throw new Error('HTTP ' + res.status);
+
+const { url } = await res.json();
+
+// Redirection uniquement vers une page de paiement HTTPS (Stripe, etc.)
+
+if (typeof url !== 'string' || !url.startsWith('https://')) throw new Error('URL invalide');
+
+window.location.href = url;
+
+} catch (err) {
+
+showToast('Paiement indisponible pour le moment. Réessayez dans un instant.');
+
+btn.disabled = false;
+
+btn.textContent = 'Passer la commande';
+
+} finally {
+
+checkingOut = false;
+
+}
+
+}
+
+
+
+// ---------- Catalogue ----------
+
+function renderProducts(items) {
+
+$('product-grid').innerHTML = items.map(p => `
+
+<article class="bg-brand-card border border-brand-border rounded-lg overflow-hidden flex flex-col group">
+
+<div class="h-64 overflow-hidden relative">
+
+<img src="${esc(p.img)}" alt="${esc(p.name)}" width="600" height="400" loading="lazy" decoding="async"
+
+class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+
+</div>
+
+<div class="p-4 flex flex-col flex-grow justify-between">
+
+<div>
+
+<span class="text-xs text-brand-accent mono uppercase tracking-wider">${esc(CATEGORY_LABELS[p.category] || p.category)}</span>
+
+<h3 class="font-bold text-white mt-1">${esc(p.name)}</h3>
+
+<div class="mt-3">
+
+<label for="size-${p.id}" class="block text-xs text-zinc-400 mb-1 mono">Taille :</label>
+
+<select id="size-${p.id}" class="w-full bg-brand-black border border-brand-border text-xs text-white rounded p-1.5 mono focus:outline-none focus:border-brand-accent">
+
+${SIZES.map(s => `<option value="${s}"${s === 'M' ? ' selected' : ''}>${s}</option>`).join('')}
+
+</select>
+
+</div>
+
+</div>
+
+<div class="flex items-center justify-between mt-4">
+
+<span class="mono font-bold text-lg text-zinc-200">${euro(p.priceCents)}</span>
+
+<button type="button" data-add="${p.id}" class="bg-brand-border hover:bg-brand-accent hover:text-black text-white text-xs px-3 py-2 rounded transition mono font-semibold">Ajouter</button>
+
+</div>
+
+</div>
+
+</article>`).join('');
+
+}
+
+
+
+function filterProducts(cat, btn) {
+
+document.querySelectorAll('.filter-btn').forEach(b => {
+
+const on = b === btn;
+
+b.setAttribute('aria-pressed', String(on));
+
+b.classList.toggle('bg-brand-accent', on);
+
+b.classList.toggle('text-black', on);
+
+b.classList.toggle('font-bold', on);
+
+b.classList.toggle('bg-brand-card', !on);
+
+b.classList.toggle('text-zinc-400', !on);
+
+b.classList.toggle('border', !on);
+
+b.classList.toggle('border-brand-border', !on);
+
+});
+
+renderProducts(cat === 'all' ? products : products.filter(p => p.category === cat));
+
+}
+
+
+
+// ---------- Événements (délégation, sans onclick inline) ----------
+
+$('filter-container').addEventListener('click', e => {
+
+const btn = e.target.closest('[data-filter]');
+
+if (btn) filterProducts(btn.dataset.filter, btn);
+
+});
+
+
+
+$('product-grid').addEventListener('click', e => {
+
+const btn = e.target.closest('[data-add]');
+
+if (btn) addToCart(Number(btn.dataset.add));
+
+});
+
+
+
+$('cart-items').addEventListener('click', e => {
+
+const btn = e.target.closest('[data-action]');
+
+if (!btn) return;
+
+const id = Number(btn.dataset.id), size = btn.dataset.size;
+
+if (btn.dataset.action === 'inc') changeQty(id, size, 1);
+
+else if (btn.dataset.action === 'dec') changeQty(id, size, -1);
+
+else if (btn.dataset.action === 'remove') removeLine(id, size);
+
+});
+
+
+
+$('cart-btn').addEventListener('click', openCart);
+
+$('close-cart').addEventListener('click', closeCart);
+
+$('cart-overlay').addEventListener('click', closeCart);
+
+$('checkout-btn').addEventListener('click', checkout);
+
+
+
+document.addEventListener('keydown', e => {
+
+if (!isCartOpen()) return;
+
+if (e.key === 'Escape') return closeCart();
+
+if (e.key === 'Tab') { // piège le focus dans le panier
+
+const f = $('cart-sidebar').querySelectorAll('button:not([disabled])');
+
+if (!f.length) return;
+
+const first = f[0], last = f[f.length - 1];
+
+if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+
+else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+
+}
+
+});
+
+
+
+// Synchronise le panier entre onglets
+
+window.addEventListener('storage', e => {
+
+if (e.key === STORAGE_KEY) { cart = loadCart(); updateCart(); }
+
+});
+
+
+
+// ---------- Init ----------
+
+renderProducts(products);
+
+updateCart();
+
+</script>
+
+</body>
+
+</html>
